@@ -4,3 +4,11 @@ Homestead.yaml
 Homestead.json
 .env
 /.idea
+assets/bower
+node_modules
+/.sass-cache
+/public/css
+/public/fonts
+/public/images
+/public/js
+
