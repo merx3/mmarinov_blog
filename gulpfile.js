@@ -33,7 +33,9 @@ var paths = {
         'resources/assets/bower/jquery/dist/jquery.js',
         'resources/assets/bower/jquery.easing/js/jquery.easing.js',
         'resources/assets/bower/bootstrap/dist/js/bootstrap.js',
-        'resources/assets/js/grayscale.js'
+        'resources/assets/bower/jqBootstrapValidation/dist/jqBootstrapValidation-1.3.7.min.js',
+        'resources/assets/js/grayscale.js',
+        'resources/assets/js/contact.js'
     ],
     images: ['resources/assets/images/**/*'],
     fonts: [

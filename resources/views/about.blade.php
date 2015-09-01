@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Marian's Laravel and PhP blog</title>
+    <title>Marian Marinov - About Me</title>
 
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,800" rel="stylesheet" type="text/css">
 
@@ -35,7 +35,7 @@
                 <i class="fa fa-bars"></i>
             </button>
             <a class="navbar-brand page-scroll" href="#page-top">
-                 Marian Marinov
+                Marian Marinov
             </a>
         </div>
 
@@ -51,10 +51,10 @@
                     <a class="page-scroll" href="/">Posts</a>
                 </li>
                 <li>
-                <a href="about">About</a>
+                    <a href="about">About</a>
                 </li>
                 <li>
-                <a href="contact">Contact Me</a>
+                    <a href="contact">Contact Me</a>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -63,42 +63,30 @@
 </nav>
 
 <!-- Page Header -->
-<header class="intro-header" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/computer-bg.jpg'); background-position: 0% 15%;">
+<header class="intro-header" style="background-image: url('images/about-bg.jpg'); background-position: 0; background-size:auto 100%; background-color: #3b3b3b">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="site-heading">
-                    <h1>PhP, Laravel and others</h1>
-                    <span class="subheading">The creative mess of the web illustrated in articles</span>
+                    <h1>About me</h1>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-
 <!-- Main Content -->
 <div class="container">
     <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="post-preview">
-                <a href="#">
-                    <h2 class="post-title">
-                        Blog posts coming soon
-                    </h2>
-                    <h3 class="post-subtitle">
-                        The site is still in development phase. Expect the real posts soon.
-                    </h3>
-                </a>
-                <p class="post-meta">Posted by <a href="#">Marian Marinov</a> on August 17, 2015</p>
-            </div>
-            <hr>
-            <!-- Pager -->
-            <ul class="pager">
-                <li class="next disabled">
-                    <a href="#">Older Posts &rarr;</a>
-                </li>
-            </ul>
+        <div class="about-profile col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <h3>Hey there. So, I see you want to know a bit more about me.</h3>
+            <img src="images/profile.jpg">
+            <p >
+            I'm an aspiring web developer in his early stage of his career. I've graduated IT and I have worked for the past 2 years at companies doing work related to web development using PhP, Laravel and, of course, HTML, CSS and Javascript, and before that I've also done some QA work. I'm looking forward to becoming a reliable and devoted developer and freelancer who can help people make the site of their dreams. My moto is “The black letters are read on a white paper”.
+            </p>
+            <p>
+            In this blog I try to cover different little know-hows and guides to the daily challenges that new and veteran web devs face. It's mainly focused on working with laravel, php and front-end, but you could find some whimsy articles too. In any case, my goal is to help you learn a few things and get you to enjoy the world of web content creation.
+            </p>
         </div>
     </div>
 </div>

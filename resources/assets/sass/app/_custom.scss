@@ -1,0 +1,358 @@
+// -- Typography
+
+a img {
+  &:hover,
+  &:focus {
+    cursor: zoom-in;
+  }
+}
+
+// Header
+
+.intro-header {
+  background-color: $grayscale-text;
+  background: no-repeat center center;
+  background-attachment: scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  // NOTE: Background images are set within the HTML using inline CSS!
+  margin-bottom: 50px;
+  .site-heading,
+  .post-heading,
+  .page-heading {
+    padding: 100px 0 50px;
+    color: white;
+    @media only screen and (min-width: 768px) {
+      padding: 150px 0;
+    }
+  }
+  .site-heading,
+  .page-heading {
+    text-align: center;
+    h1 {
+      margin-top: 0;
+      font-size: 50px;
+    }
+    .subheading {
+      font-size: 32px;
+      line-height: 1.1;
+      display: block;
+      font-family: $custom-font-family;
+      font-weight: 800;
+      margin: 10px 0 0;
+    }
+    .small{
+      border-color: $grayscale-darkened;
+      border-width: 4px;
+      margin: 15px auto;
+      max-width: 100px;
+    }
+    @media only screen and (min-width: 768px) {
+      h1 {
+        font-size: 60px;
+      }
+    }
+  }
+  .post-heading {
+    h1 {
+      font-size: 35px;
+    }
+    .subheading,
+    .meta {
+      line-height: 1.1;
+      display: block;
+    }
+    .subheading {
+      font-family: $custom-font-family;
+      font-size: 24px;
+      margin: 10px 0 30px;
+      font-weight: 600;
+    }
+    .meta {
+      font-family: $custom-font-family;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 20px;
+      a {
+        color: white;
+      }
+    }
+    @media only screen and (min-width: 768px) {
+      h1 {
+        font-size: 55px;
+      }
+      .subheading {
+        font-size: 30px;
+      }
+    }
+  }
+}
+
+// Post Preview Pages
+
+.post-preview {
+  > a {
+    color: $grayscale-dark;
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      color: $grayscale-highlight;
+    }
+    > .post-title {
+      font-size: 30px;
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+    > .post-subtitle {
+      margin: 0;
+      font-weight: 300;
+      margin-bottom: 10px;
+    }
+  }
+  > .post-meta {
+    color: $grayscale-text;
+    font-size: 16px;
+    font-style: italic;
+    margin-top: 0;
+    > a {
+      text-decoration: none;
+      color: $grayscale-darkened;
+      &:hover,
+      &:focus {
+        color: $grayscale-highlight;
+        text-decoration: underline;
+      }
+    }
+  }
+  @media only screen and (min-width: 768px) {
+    > a {
+      > .post-title {
+        font-size: 36px;
+      }
+    }
+  }
+}
+
+// Sections
+
+.section-heading {
+  font-size: 36px;
+  margin-top: 60px;
+  font-weight: 700;
+}
+
+.caption {
+  text-align: center;
+  font-size: 14px;
+  padding: 10px;
+  font-style: italic;
+  margin: 0;
+  display: block;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+footer {
+  padding: 50px 0 65px;
+  .list-inline {
+    margin: 0;
+    padding: 0;
+  }
+  .copyright {
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 0;
+  }
+}
+
+// Contact Form Styles
+
+.floating-label-form-group {
+  font-size: 14px;
+  position: relative;
+  margin-bottom: 0;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid $grayscale-light;
+  input,
+  textarea {
+    z-index: 1;
+    position: relative;
+    padding-right: 0;
+    padding-left: 0;
+    border: none;
+    border-radius: 0;
+    font-size: 1.5em;
+    background: none;
+    box-shadow: none !important;
+    resize: none;
+    height: auto;
+  }
+  label {
+    display: block;
+    z-index: 0;
+    position: relative;
+    top: 2em;
+    margin: 0;
+    font-size: 0.85em;
+    line-height: 1.764705882em;
+    vertical-align: middle;
+    vertical-align: baseline;
+    opacity: 0;
+    -webkit-transition: top 0.3s ease,opacity 0.3s ease;
+    -moz-transition: top 0.3s ease,opacity 0.3s ease;
+    -ms-transition: top 0.3s ease,opacity 0.3s ease;
+    transition: top 0.3s ease,opacity 0.3s ease;
+  }
+  &:not(:first-child) {
+    padding-left: 14px;
+    border-left: 1px solid $grayscale-light;
+  }
+}
+
+.floating-label-form-group-with-value {
+  label {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+.floating-label-form-group-with-focus {
+  label {
+    color: $grayscale-darkened;
+  }
+}
+
+form .row:first-child .floating-label-form-group {
+  border-top: 1px solid $grayscale-light;
+}
+
+// Button Styles
+
+.btn {
+  font-family: $custom-font-family;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  border-radius: 0;
+  padding: 15px 25px;
+}
+
+.btn-lg {
+  font-size: 16px;
+  padding: 25px 35px;
+}
+
+.btn-default {
+  &:hover,
+  &:focus {
+    background-color: $grayscale-darkened;
+    border: 1px solid $grayscale-darkened;
+    color: white;
+  }
+}
+
+// Pager Styling
+
+.pager {
+
+  margin: 20px 0 0;
+
+  li {
+    > a,
+    > span {
+      font-family: $custom-font-family;
+      text-transform: uppercase;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      padding: 15px 25px;
+      background-color: white;
+      border-radius: 0;
+    }
+
+    > a:hover,
+    > a:focus {
+      color: white;
+      background-color: $grayscale-darkened;
+      border: 1px solid $grayscale-darkened;
+    }
+  }
+
+  .disabled {
+    > a,
+    > a:hover,
+    > a:focus,
+    > span {
+      color: lighten($grayscale-text, 40%);
+      background-color: $grayscale-light;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// -- Highlight Color Customization
+
+::-moz-selection {
+  color: white;
+  text-shadow: none;
+  background: $grayscale-darkened;
+}
+
+::selection {
+  color: white;
+  text-shadow: none;
+  background: $grayscale-darkened;
+}
+
+img::selection {
+  color: white;
+  background: transparent;
+}
+
+img::-moz-selection {
+  color: white;
+  background: transparent;
+}
+
+.contact-icon i{
+  display: block;
+  text-indent: -9999px;
+  width: 100%;
+  height: 100%;
+
+  &.linkedin-custom{
+    background: url("../images/linkedin.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  &.github-custom{
+    background: url("../images/github.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  &.mail-custom{
+    background: url("../images/mail.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+.about-profile img{
+  float: left;
+  height: 180px;
+  margin-bottom: 15px;
+  margin-right: 35px;
+  width: 230px;
+}
+
+@media (max-width: 600px) {
+  .about-profile p:first-of-type {
+    clear: both;
+  }
+}

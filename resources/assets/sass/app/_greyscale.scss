@@ -6,9 +6,10 @@ html {
 body {
   width: 100%;
   height: 100%;
-  font-family: $grayscale-body-font-family;
-  color: $grayscale-light;
-  background-color: $grayscale-dark;
+  font-family: $custom-font-family;
+  font-size: 20px;
+  color: $grayscale-dark;
+  background-color: #fff;
   -webkit-tap-highlight-color: transparentize($grayscale-light, 0.8);
 }
 
@@ -20,15 +21,18 @@ h5, .h5,
 h6, .h6 {
   margin: 0 0 35px;
   text-transform: uppercase;
-  font-family: $grayscale-headline-font-family;
+  font-family: $custom-font-family;
   font-weight: 700;
   letter-spacing: 1px;
 }
 
 p {
-  margin: 0 0 25px;
+  margin: 30px 0;
   font-size: 18px;
   line-height: 1.5;
+  a {
+    text-decoration: underline;
+  }
 }
 
 @media(min-width:$screen-xs-max) {
@@ -42,7 +46,7 @@ p {
 }
 
 a {
-  color: $grayscale-primary;
+  color: $grayscale-text;
   -webkit-transition: all .2s ease-in-out;
   -moz-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
@@ -62,7 +66,7 @@ a {
   margin-bottom: 0;
   border-bottom: 1px solid transparentize($grayscale-light, 0.7);
   text-transform: uppercase;
-  font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: $custom-font-family;
   background-color: $grayscale-dark;
 
   .navbar-brand {
@@ -71,21 +75,20 @@ a {
     &:focus {
       outline: none;
     }
+  }
+  .navbar-toggle {
+    padding: 4px 6px;
+    font-size: 16px;
+    color: $grayscale-primary;
 
-    .navbar-toggle {
-      padding: 4px 6px;
-      font-size: 16px;
-      color: $grayscale-light;
-
-      &:focus,
-      &:active {
-        outline: none;
-      }
+    &:focus,
+    &:active {
+      outline: none;
     }
   }
 
   a {
-    color: $grayscale-light;
+    color: $grayscale-primary;
   }
 
   .nav {
@@ -127,7 +130,8 @@ a {
 
   .top-nav-collapse {
     padding: 0;
-    background-color: $grayscale-dark;
+    background-color: #2C2C2C;
+    color: $grayscale-light;
   }
 
   .navbar-custom.top-nav-collapse {
@@ -242,7 +246,7 @@ a {
 
 .btn {
   text-transform: uppercase;
-  font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: $custom-font-family;
   font-weight: 400;
   -webkit-transition: all .3s ease-in-out;
   -moz-transition: all .3s ease-in-out;
@@ -309,4 +313,9 @@ img {
   &::-moz-selection {
     background: transparent;
   }
+}
+
+.copyright{
+	margin-top: 30px;
+	font-size: 13px;
 }
