@@ -11,12 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/about', function(){
-    return view('about');
-});
+Route::get('/', [
+    'as' => 'articles.index',
+    'uses' => 'ArticlesController@index'
+]);
 
 Route::resource('contact', 'ContactController');
+
+Route::get('/about', [
+    'as' => 'about',
+    'uses' => function(){
+        $data = [
+            'title' => 'Marian Marinov - About Me',
+            'header_type' => 'about',
+            'header_content' => '<h1>About me</h1>',
+
+        ];
+        return view('about', $data);
+}]);

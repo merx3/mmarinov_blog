@@ -11,39 +11,36 @@ use App\Http\Controllers\Controller;
 class ContactController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display the contact me page.
      *
      * @return Response
      */
     public function index()
     {
+        $data = [
+            'title' => 'Marian Marinov - Contact Me',
+            'header_type' => 'contact',
+            'header_content' => '<h1>Contact me</h1>',
+
+        ];
+
         \JavaScript::put([
             'sendEmailUrl' => route('contact.store')
         ]);
 
         \Session::put('currentTime', new \DateTime());
-        return view('contact');
+        return view('contact', $data);
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Send an email containing the data in the Contact me form.
      *
      * @param  Request  $request
      * @return Response
      */
     public function store(Request $request)
     {
-        $spamMinTime = 10; // in seconds
+        $spamMinTime = 10; // estimated minimum time(in seconds) needed to fill the form by a human
         if (\Session::has('currentTime') && !\Input::has('favourite_color')) { // check if the user's not a bot
             $start = \Session::get('currentTime');
             $end = new \DateTime();
@@ -66,48 +63,4 @@ class ContactController extends Controller
         return '';
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

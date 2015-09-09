@@ -90,6 +90,10 @@ gulp.task('clean', function(cb) {
     del([paths.stylesOutput, paths.scriptsOutput, paths.imagesOutput, paths.fontsOutput], cb)
 });
 
+gulp.task('clearCache', function(done){
+    return cache.clearAll(done);
+})
+
 
 elixir(function(mix) {
     //mix.sass('main.scss', 'public/css/main.css');

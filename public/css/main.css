@@ -14903,7 +14903,7 @@ img::-moz-selection {
   height: 100%;
 }
 .contact-icon i.linkedin-custom {
-  background: url("../images/linkedin.png");
+  background: url("../images/li.png");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -14933,4 +14933,19 @@ img::-moz-selection {
   .about-profile p:first-of-type {
     clear: both;
   }
+}
+.intro-header.articles {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/computer-bg.jpg");
+  background-position: 0% 15%;
+}
+.intro-header.contact {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/contact-bg.jpg");
+  background-position: 0 68%;
+  background-size: 100% auto;
+}
+.intro-header.about {
+  background-image: url("/images/about-bg.jpg");
+  background-position: 0;
+  background-size: auto 100%;
+  background-color: #3b3b3b;
 }
