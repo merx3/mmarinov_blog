@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class ArticlesController extends Controller
 {
     /**
-     * Display paginated list of posts and their short description.
+     * Display paginated list of posts and their short description. (for now it's just a static page)
      *
      * @return Response
      */

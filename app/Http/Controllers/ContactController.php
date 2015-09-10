@@ -33,7 +33,7 @@ class ContactController extends Controller
     }
 
     /**
-     * Send an email containing the data in the Contact me form.
+     * Send an email containing the data in the Contact me form after checking for bot spamming.
      *
      * @param  Request  $request
      * @return Response
