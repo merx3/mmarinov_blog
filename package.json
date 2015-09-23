@@ -3,12 +3,13 @@
   "private": true,
   "devDependencies": {
     "gulp": "^3.9.0",
-    "gulp-sass": "^2.0.4"
+    "gulp-phpunit": "^0.9.1",
+    "gulp-sass": "^2.0.4",
+    "merge-stream": "^1.0.0"
   },
   "dependencies": {
     "laravel-elixir": "^2.0.0",
     "bootstrap-sass": "^3.0.0",
-
     "connect": "^3.3.4",
     "connect-livereload": "^0.5.3",
     "del": "^1.1.1",
@@ -22,7 +23,6 @@
     "gulp-rename": "^1.2.0",
     "gulp-ruby-sass": "^1.0.0-alpha.3",
     "gulp-uglify": "^1.1.0"
-
   },
   "homepage": "http://mmarinov.com"
 }

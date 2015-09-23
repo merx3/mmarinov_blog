@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Crypt;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use GuzzleHttp\Client;
 
 class ContactController extends Controller
 {
@@ -41,7 +42,19 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $spamMinTime = 10; // estimated minimum time(in seconds) needed to fill the form by a human
-        if (\Session::has('currentTime') && !\Input::has('favourite_color')) { // check if the user's not a bot
+        $client = new Client([
+            'base_uri' => 'https://www.google.com',
+            'timeout'  => 2.0,
+        ]);
+        $recaptchaRequestContent = [
+            'secret' => env('RECAPTCHA_KEY'),
+            'response' => \Input::get('recaptcha')
+        ];
+
+        $response = $client->request('POST', '/recaptcha/api/siteverify', ['form_params' => $recaptchaRequestContent]);
+        $hasPassedCaptcha = json_decode((string)$response->getBody())->success;
+
+        if ($hasPassedCaptcha && \Session::has('currentTime') && !\Input::has('favourite_color')) { // check if the user's not a bot
             $start = \Session::get('currentTime');
             $end = new \DateTime();
             $diff = $end->getTimestamp() - $start->getTimestamp();

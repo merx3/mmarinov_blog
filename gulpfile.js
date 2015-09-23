@@ -22,12 +22,23 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     notify = require('gulp-notify'),
     cache = require('gulp-cache'),
-    del = require('del');
+    del = require('del'),
+    merge = require('merge-stream'),
+    phpunit = require('gulp-phpunit');;
 
 /* Set paths */
 
 var paths = {
     /* Source paths */
+    admin: {
+        styles : ['resources/assets/sass/main_admin.scss'],
+        raw_styles: [
+            'resources/assets/bower/animate.css/animate.min.css'
+        ],
+        scripts: [
+            'resources/assets/bower/jquery/dist/jquery.js',
+        ]
+    },
     styles: ['resources/assets/sass/main.scss'],
     scripts: [
         'resources/assets/bower/jquery/dist/jquery.js',
@@ -42,9 +53,11 @@ var paths = {
         'resources/assets/bower/bootstrap/fonts/*',
         'resources/assets/bower/font-awesome/fonts/*'
     ],
+    iCheckSrc: 'resources/assets/bower/iCheck/skins/flat/*',
 
     /* Output paths */
     stylesOutput: 'public/css',
+    iCheckOutput: 'public/css/icheck',
     scriptsOutput: 'public/js',
     imagesOutput: 'public/images',
     fontsOutput: 'public/fonts'
@@ -59,6 +72,34 @@ gulp.task('styles', function() {
         .pipe(minifycss())
         .pipe(gulp.dest(paths.stylesOutput))
         .pipe(notify({ message: 'Styles task complete' }));
+});
+
+gulp.task('admin_styles',  function(){
+    var sass_styles = sass(paths.admin.styles, { style: 'expanded' })
+        .pipe(gulp.dest(paths.stylesOutput))
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(minifycss())
+        .pipe(gulp.dest(paths.stylesOutput));
+
+    var normal_styles = gulp.src(paths.admin.raw_styles)
+        .pipe(gulp.dest(paths.stylesOutput))
+        .pipe(gulp.src(paths.iCheckSrc))
+        .pipe(gulp.dest(paths.iCheckOutput))
+        .pipe(notify({ message: 'Admin styles task complete', onLast: true }));
+
+    return merge(sass_styles, normal_styles);
+});
+
+gulp.task('admin_scripts', function() {
+    return gulp.src(paths.admin.scripts)
+        .pipe(jshint('.jshintrc'))
+        .pipe(jshint.reporter('default'))
+        .pipe(concat('main_admin.js'))
+        .pipe(gulp.dest(paths.scriptsOutput))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(uglify())
+        .pipe(gulp.dest(paths.scriptsOutput))
+        .pipe(notify({ message: 'Admin scripts task complete' }));
 });
 
 gulp.task('scripts', function() {
@@ -85,6 +126,28 @@ gulp.task('fonts', function() {
         .pipe(gulp.dest(paths.fontsOutput))
         .pipe(notify({ message: 'Fonts task complete', onLast: true }));
 });
+
+var testNotification = function (status, pluginName, override) {
+    var options = {
+        title:   ( status == 'pass' ) ? 'Tests Passed' : 'Tests Failed',
+        message: ( status == 'pass' ) ? '\n\nAll tests have passed!\n\n' : '\n\nOne or more tests failed...\n\n',
+        icon:    __dirname + '/node_modules/gulp-' + pluginName +'/assets/test-' + status + '.png'
+    };
+    if(typeof override != "undefined") {
+        options.title = (typeof override.title != "undefined") ? override.title : options.title;
+        options.message = (typeof override.message != "undefined") ? override.message : options.message;
+        options.icon = (typeof override.icon != "undefined") ? override.icon : options.icon;
+    }
+
+    return options;
+};
+
+gulp.task('tests', function(){
+    return gulp.src('phpunit.xml')
+        .pipe(phpunit('', {notify: true}))
+        .on('error', notify.onError(testNotification('fail', 'phpunit')))
+        .pipe(notify(testNotification('pass', 'phpunit')));
+})
 
 gulp.task('clean', function(cb) {
     del([paths.stylesOutput, paths.scriptsOutput, paths.imagesOutput, paths.fontsOutput], cb)

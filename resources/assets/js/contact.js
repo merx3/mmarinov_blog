@@ -1,5 +1,6 @@
 
 $(function() {
+
     // ajax for sending the contact form after validations pass
     $("input,textarea").jqBootstrapValidation({
         preventSubmit: true,
@@ -14,13 +15,25 @@ $(function() {
             var message = $("textarea#message").val();
             var botPrevention = $("input#favourite_color").val();
             var token = $("input[name='_token']").val();
+            var recaptchaResponse;
             var firstName = name; // For Success/Failure Message
-            $('#btn_contact_submit').html('Sending...');
+            $('#btn_contact_submit').val('Sending...');
+            $('#success').html('');
             // Check for white space in name for Success/Fail message
             if (firstName.indexOf(' ') >= 0) {
                 firstName = name.split(' ').slice(0, -1).join(' ');
             }
-            if(botPrevention == ""){
+            recaptchaResponse = grecaptcha.getResponse(recaptchaId);
+            if(recaptchaResponse == "") {
+                $('#success').html(
+                    "<div class='alert alert-danger'>" +
+                    "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>" +
+                    "<strong>Please, complete the captcha test before sending.</strong>" +
+                    '</div>'
+                );
+
+                $('#btn_contact_submit').val('Send');
+            } else if(botPrevention == ""){
                 $.ajax({
                     url: laravelVars.sendEmailUrl,
                     type: "POST",
@@ -29,6 +42,7 @@ $(function() {
                         email: email,
                         message: message,
                         favourite_color: botPrevention,
+                        recaptcha: recaptchaResponse,
                         _token: token
                     },
                     cache: false,
@@ -43,19 +57,21 @@ $(function() {
 
                         //clear all fields
                         $('#contactForm').trigger("reset");
-                        $('#btn_contact_submit').html('Send');
+                        $('#btn_contact_submit').val('Send');
+                        grecaptcha.reset(recaptchaId);
                     },
                     error: function() {
                         // Fail message
                         $('#success').html(
                             "<div class='alert alert-danger'>" +
                             "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>" +
-                            "<strong>Sorry " + firstName + ", it seems that my mail server is not responding. Please try again later!" +
+                            "<strong>Sorry " + firstName + ", it seems that my mail server is not responding. Please try again later!</strong>" +
                             '</div>'
                         );
                         //clear all fields
                         $('#contactForm').trigger("reset");
-                        $('#btn_contact_submit').html('Send');
+                        $('#btn_contact_submit').val('Send');
+                        grecaptcha.reset(recaptchaId);
                     },
                 });
             } else {
@@ -69,6 +85,8 @@ $(function() {
 
                 //clear all fields
                 $('#contactForm').trigger("reset");
+                $('#btn_contact_submit').val('Send');
+                grecaptcha.reset(recaptchaId);
             }
         },
         filter: function() {
@@ -80,6 +98,11 @@ $(function() {
     //    e.preventDefault();
     //    $(this).tab("show");
     //});
+
+
+    var onloadCallback = function() {
+        alert("Here!");
+    };
 });
 
 
@@ -98,3 +121,4 @@ $(function() {
         $(this).removeClass("floating-label-form-group-with-focus");
     });
 });
+

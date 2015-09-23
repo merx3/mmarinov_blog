@@ -19,3 +19,14 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Articles::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->sentence(mt_rand(5, 8)),
+        'description' => $faker->sentence(mt_rand(9, 15)),
+        'slug' => str_replace(' ', '-', strtolower($faker->sentence(mt_rand(3, 5)))),
+        'author_id' => 1,
+        'content' => $faker->paragraph(mt_rand(3, 5)),
+        'published_at' => $faker->dateTimeBetween('-1 month', '+3 days')
+    ];
+});

@@ -1,5 +1,18 @@
 @extends('layouts.master')
 
+@section('extra_scripts')
+    <script type="text/javascript">
+        var recaptchaId;
+
+        var onloadCallback = function() {
+            recaptchaId = grecaptcha.render('recaptcha', {
+                'sitekey': '6LcSoAwTAAAAAAF2NpXd8s-RkUWjt1wlLiDrZnp_',
+                'theme': 'light'
+            });
+        }
+    </script>
+@stop
+
 @section('content')
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -34,6 +47,11 @@
                 </div>
             </div>
             <br>
+            <div class="row control-group">
+                {{--<div class="form-group col-xs-12 controls g-recaptcha" data-sitekey="6LcSoAwTAAAAAAF2NpXd8s-RkUWjt1wlLiDrZnp_"></div>--}}
+                <div id="recaptcha"></div>
+            </div>
+            <br>
             <div id="success"></div>
             <div class="row">
                 <div class="form-group col-xs-12">
@@ -41,6 +59,9 @@
                 </div>
             </div>
             {!! Form::close() !!}
+            <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+                    async defer>
+            </script>
         </div>
     </div>
 @stop
