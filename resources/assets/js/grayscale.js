@@ -13,8 +13,8 @@ $(window).scroll(function() {
     }
 });
 
-// jQuery for page scrolling feature - requires jQuery Easing plugin
 $(function() {
+    // jQuery for page scrolling feature - requires jQuery Easing plugin
     $('a.page-scroll').bind('click', function(event) {
         var $anchor = $(this);
         $('html, body').stop().animate({
@@ -22,6 +22,52 @@ $(function() {
         }, 1500, 'easeInOutExpo');
         event.preventDefault();
     });
+
+    // facebook share button functionality
+    $('.post-share.facebook').click(function(e){
+        e.preventDefault();
+        FB.ui({
+            method: 'feed',
+            name: $(this).data('name'),
+            link: $(this).attr('href'),             
+            caption: $(this).data('caption'),
+            description: $(this).data('description')
+        });
+    });
+
+    // share buttons slide effect
+    $( window ).resize(function() {
+        if(window.screen.width > 820) {
+            $("aside div.share-button .slide-link").hover(
+                function(){$(this).stop(true, false).animate({ 'padding-right': '85px' }, 500)},
+                function(){$(this).stop(true, false).animate({ 'padding-right': '0' }, 500)}
+            );
+            $('.fixed-social').css('right', '');
+        } else {
+            $("aside div.share-button .slide-link").unbind('mouseenter mouseleave')
+            $('.open-fixed-social').click(function() {
+                $('.fixed-social').animate({
+                    right: '-90px'
+                }, 500, function() {});
+                $('.mobile-fixed-social').animate({
+                    right: '50px'
+                }, 500, function() {});
+                $('.open-fixed-social').hide();
+                $('.close-fixed-social').show();
+            });
+
+            $('.close-fixed-social').click(function() {
+                $('.fixed-social').animate({
+                    right: '-140px'
+                }, 500, function() {});
+                $('.mobile-fixed-social').animate({
+                    right: '0px'
+                }, 500, function() {});
+                $('.open-fixed-social').show();
+                $('.close-fixed-social').hide();
+            });
+        }
+    }).resize();
 });
 
 // Closes the Responsive Menu on Menu Item Click
@@ -29,3 +75,16 @@ $('.navbar-collapse ul li a').click(function() {
     $('.navbar-toggle:visible').click();
 });
 
+// hover effect on Articles
+$( '.dropdown' ).hover(
+    function(){
+        $(this).children('.sub-menu').slideDown(400, stop());
+    },
+    function(){
+        $(this).children('.sub-menu').slideUp(400, stop());
+    }
+);
+
+function stop(){
+    $('.sub-menu').stop(true, true);
+}

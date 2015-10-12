@@ -18,18 +18,17 @@ class ContactController extends Controller
      */
     public function index()
     {
+        \Session::put('currentTime', new \DateTime());
         $data = [
             'title' => 'Marian Marinov - Contact Me',
             'header_type' => 'contact',
             'header_content' => '<h1>Contact me</h1>',
-
+            'pageDescription' => 'If you\'d like to contact me, feel free to send me a message using the contact form on this page.',
+            'pageKeywords' => 'contact, blog, email, info, message'
         ];
-
         \JavaScript::put([
             'sendEmailUrl' => route('contact.store')
         ]);
-
-        \Session::put('currentTime', new \DateTime());
         return view('contact', $data);
     }
 
@@ -44,17 +43,19 @@ class ContactController extends Controller
         $spamMinTime = 10; // estimated minimum time(in seconds) needed to fill the form by a human
         $client = new Client([
             'base_uri' => 'https://www.google.com',
-            'timeout'  => 2.0,
+            'timeout'  => 4.0,
         ]);
         $recaptchaRequestContent = [
             'secret' => env('RECAPTCHA_KEY'),
-            'response' => \Input::get('recaptcha')
+            'response' => $request->get('recaptcha')
         ];
 
+        // get Google's captcha test result
         $response = $client->request('POST', '/recaptcha/api/siteverify', ['form_params' => $recaptchaRequestContent]);
         $hasPassedCaptcha = json_decode((string)$response->getBody())->success;
 
-        if ($hasPassedCaptcha && \Session::has('currentTime') && !\Input::has('favourite_color')) { // check if the user's not a bot
+        // check if the user's not a bot
+        if ($hasPassedCaptcha && \Session::has('currentTime') && !$request->has('favourite_color')) { 
             $start = \Session::get('currentTime');
             $end = new \DateTime();
             $diff = $end->getTimestamp() - $start->getTimestamp();
@@ -62,14 +63,15 @@ class ContactController extends Controller
                 \Session::put('currentTime', new \DateTime());
                 \Mail::send('emails.contact',
                     [
-                        'email' => \Input::get('email'),
-                        'name' => \Input::get('name'),
-                        'messageSend' => \Input::get('message'),
-                    ], function($message)
-                {
-                    $message->from('admin@mmarinov.com');
-                    $message->to('marian.mmarinov@gmail.com', 'Marian Marinov')->subject('Blog contact email!');
-                });
+                        'email' => $request->get('email'),
+                        'name' => $request->get('name'),
+                        'messageSend' => $request->get('message'),
+                    ], 
+                    function($message) {
+                        $message->from('admin@mmarinov.com');
+                        $message->to('marian.mmarinov@gmail.com', 'Marian Marinov')->subject('Blog contact email!');
+                    }
+                );
             }
         }
 

@@ -17,6 +17,7 @@ class CreateArticlesTable extends Migration
             $table->string('title');
             $table->string('description', 155);
             $table->string('slug')->unique();
+            $table->string('keywords');
             $table->integer('author_id')->unsigned();
             $table->foreign('author_id')->references('id')->on('users');
             $table->text('content');

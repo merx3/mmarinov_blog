@@ -5,7 +5,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                 <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="#page-top">
+            <a class="navbar-brand page-scroll" href="{{ route('articles.index') }}">
                 Marian Marinov
             </a>
         </div>
@@ -18,8 +18,13 @@
                     <a href="#page-top"></a>
                 </li>
                 </li>
-                <li>
+                <li class="dropdown">
                     {!! link_to_route('articles.index', 'Articles'); !!}
+                     <ul class="sub-menu">
+                        @foreach($navCategories as $category)
+                            <li><a href="{{ route('articles.index', ['category' => $category->name]) }}">{{ $category->name }}</a></li>
+                        @endforeach
+                    </ul>
                 </li>
                 <li>
                     {!! link_to_route('about', 'About'); !!}

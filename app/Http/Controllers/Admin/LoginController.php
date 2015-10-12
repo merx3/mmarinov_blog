@@ -16,17 +16,10 @@ class LoginController extends Controller
      */
     public function index()
     {
+        if(\Auth::check()){
+            return redirect()->route('admin.index');
+        }
         return view('admin.login');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -35,43 +28,15 @@ class LoginController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $email = $request->get('email');
+        $password = $request->get('password');
+        if(\Auth::attempt(['email' => $email, 'password' => $password, 'is_banned' => '0'])){
+            return redirect()->intended(route('admin.index'));
+        } else {
+            return redirect()->back()->withInput()->withErrors(['message' => 'Incorrect credentials.']);
+        }
     }
 
     /**
@@ -80,8 +45,9 @@ class LoginController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy()
     {
-        //
+        \Auth::logout();
+        return redirect()->route('admin.login.index');
     }
 }

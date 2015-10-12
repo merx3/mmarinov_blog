@@ -31,12 +31,31 @@ var gulp = require('gulp'),
 var paths = {
     /* Source paths */
     admin: {
-        styles : ['resources/assets/sass/main_admin.scss'],
+        styles : [
+            'resources/assets/sass/main_admin.scss'
+        ],
         raw_styles: [
-            'resources/assets/bower/animate.css/animate.min.css'
+            'resources/assets/bower/animate.css/animate.min.css',
+            'resources/assets/bower/jvectormap/jquery-jvectormap.css',
+            'resources/assets/bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
+            'resources/assets/bower/angular-filemanager/dist/angular-filemanager.css',
+            'resources/assets/bower/bootswatch/cosmo/bootstrap.min.css',
+            'resources/assets/css/prism.css'            
         ],
         scripts: [
             'resources/assets/bower/jquery/dist/jquery.js',
+            'resources/assets/bower/bootstrap/dist/js/bootstrap.js',
+            'resources/assets/bower/iCheck/icheck.js',
+            'resources/assets/bower/bootstrap-datepicker/js/bootstrap-datepicker.js',
+            'resources/assets/js/admin.js'
+        ],
+        raw_scripts: [
+            'resources/assets/bower/ckeditor/**/*',
+            'resources/assets/bower/angular/angular.min.js',
+            'resources/assets/bower/angular-translate/angular-translate.min.js',
+            'resources/assets/bower/angular-cookies/angular-cookies.min.js',
+            'resources/assets/js/prism.js',
+            'resources/assets/bower/angular-filemanager/dist/angular-filemanager.min.js'
         ]
     },
     styles: ['resources/assets/sass/main.scss'],
@@ -91,15 +110,21 @@ gulp.task('admin_styles',  function(){
 });
 
 gulp.task('admin_scripts', function() {
-    return gulp.src(paths.admin.scripts)
+    var admin_scripts =  gulp.src(paths.admin.scripts)
         .pipe(jshint('.jshintrc'))
         .pipe(jshint.reporter('default'))
         .pipe(concat('main_admin.js'))
         .pipe(gulp.dest(paths.scriptsOutput))
         .pipe(rename({suffix: '.min'}))
         .pipe(uglify())
+        .pipe(gulp.dest(paths.scriptsOutput));
+
+
+    var ckeditor_scripts = gulp.src(paths.admin.raw_scripts, { "base" : "resources/assets/bower" })
         .pipe(gulp.dest(paths.scriptsOutput))
-        .pipe(notify({ message: 'Admin scripts task complete' }));
+        .pipe(notify({ message: 'Admin scripts task complete', onLast: true }));
+
+    return merge(admin_scripts, ckeditor_scripts);
 });
 
 gulp.task('scripts', function() {

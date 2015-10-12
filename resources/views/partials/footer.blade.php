@@ -5,21 +5,21 @@
             <li>
                 <a href="https://bg.linkedin.com/pub/marian-marinov/77/586/b34">
                                 <span class="fa-stack fa-lg contact-icon">
-                                    <i class="linkedin-custom"></i>
+                                    <i class="linkedin-custom" title="LinkedIn profile"></i>
                                 </span>
                 </a>
             </li>
             <li>
                 <a href="mailto:marian.mmarinov@gmail.com">
                                 <span class="fa-stack fa-lg contact-icon">
-                                    <i class="mail-custom"></i>
+                                    <i class="mail-custom" title="Email"></i>
                                 </span>
                 </a>
             </li>
             <li>
                 <a href="https://github.com/merx3">
                                 <span class="fa-stack fa-lg contact-icon">
-                                    <i class="github-custom"></i>
+                                    <i class="github-custom" title="Github account"></i>
                                 </span>
                 </a>
             </li>

@@ -145,6 +145,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Laracasts\Utilities\JavaScript\JavascriptServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
 

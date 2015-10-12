@@ -5,7 +5,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
+    <meta name="description" content="{{ isset($pageDescription) ? $pageDescription : '' }}">
+    <meta name="keywords" content="{{ isset($pageKeywords) ? $pageKeywords : '' }}">
+    @if(isset($isHidden))
+        <meta name="robots" content="noindex">
+    @endif
     <meta name="author" content="Marian Marinov">
 
     <title>{{ $title }}</title>
@@ -13,7 +17,7 @@
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,800" rel="stylesheet" type="text/css">
 
     <!-- Custom CSS -->
-    <link href="css/main.min.css" rel="stylesheet">
+    <link href="/css/main.min.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,7 +35,6 @@
 
 @include('partials.header')
 
-
 <!-- Main Content -->
 <div class="container">
     @yield('content')
@@ -39,7 +42,7 @@
 
 @include('partials.footer')
 
-<script src="js/main.min.js"></script>
+<script src="/js/main.min.js"></script>
 
 @include('partials.google_analytics')
 

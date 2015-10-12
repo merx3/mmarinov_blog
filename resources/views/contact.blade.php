@@ -54,7 +54,7 @@
             <br>
             <div id="success"></div>
             <div class="row">
-                <div class="form-group col-xs-12">
+                <div class="form-group col-xs-12 submit-button">
                     {!! Form::submit('Send', ['id' => 'btn_contact_submit', 'class' => 'btn btn-default']) !!}
                 </div>
             </div>

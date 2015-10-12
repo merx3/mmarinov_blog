@@ -673,6 +673,7 @@ a:focus {
 
 .nav.side-menu> li > a:hover {
   color: #F2F5F7 !important;
+  cursor: pointer;
 }
 
 .nav.side-menu>li>a:hover,
@@ -836,6 +837,9 @@ li.current-page a {
 
 .toggle a i {
   font-size: 26px;
+  &:hover {
+    cursor:pointer;
+  }
 }
 
 .nav.child_menu > li > a {
@@ -5876,7 +5880,6 @@ form:after {
   border-top: 1px solid #CFD5D9;
   padding: 15px 0;
 }
-.login_content form input[type="submit"],#content form .submit{float: left; margin-left: 38px;}
 .button a {
   background: url(http://cssdeck.com/uploads/media/items/8/8bcLQqF.png) 0 -112px no-repeat;
   color: #7E7E7E;
@@ -6337,4 +6340,12 @@ ul.notifications {
   color: #E9EDEF;
   float: right;
   opacity: 1;
+}
+
+.underlined {
+  text-decoration: underline;
+}
+
+.form-horizontal .checkbox {
+  padding-left: 0;
 }
